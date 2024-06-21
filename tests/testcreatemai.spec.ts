@@ -10,8 +10,6 @@ test('testcase01-createtest', async ({ page }) => {
   await page.getByRole('button', { name: 'Okay' }).click();
 });
 
-import { test, expect } from '@playwright/test';
-
 test.only('test', async ({ page }) => {
   await page.goto('https://www.google.co.th/');
   await page.getByLabel('ค้นหา', { exact: true }).click();
