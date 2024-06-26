@@ -25,7 +25,7 @@ test.describe('User API Tests', () => {
 
     //test case ทดสอบอัพเดทข้อมูล user 
     test('PUT - Update User' , async ({request}) => {
-        const response = await request.put('https://reqres.in/api/users/'+ userID, {  //อย่าลืมใส่จุดเชื่อมโยงข้อมูลที่จะให้มันไปอัพเดท
+        const response = await request.put('https://reqres.in/api/users/', {  //อย่าลืมใส่จุดเชื่อมโยงข้อมูลที่จะให้มันไปอัพเดท
             data : {
                 "name" : "Sky" ,
                 "job" : "Teacher"
