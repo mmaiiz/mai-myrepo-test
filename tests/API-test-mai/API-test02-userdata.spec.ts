@@ -1,8 +1,10 @@
 import { expect, test } from "@playwright/test";
+import { resource } from './data';
 
 //test.describe ใช้สร้างกลุ่มการทดสอบที่ชื่อว่า 'User API Tests' และเก็บตัวแปร userID
 test.describe('User API Tests', () => {
     let userID ;
+    const URL = resource.baseURL ;
     
     //test() ใช้สร้างเทสเคส+ชื่อ : ทดสอบสร้าง user ใหม่
     test('POST - Create User', async ({request}) => {
@@ -25,7 +27,7 @@ test.describe('User API Tests', () => {
 
     //test case ทดสอบอัพเดทข้อมูล user 
     test('PUT - Update User' , async ({request}) => {
-        const response = await request.put('https://reqres.in/api/users/', {  //อย่าลืมใส่จุดเชื่อมโยงข้อมูลที่จะให้มันไปอัพเดท
+        const response = await request.put('https://reqres.in/api/users/'+ userID , {  //อย่าลืมใส่จุดเชื่อมโยงข้อมูลที่จะให้มันไปอัพเดท
             data : {
                 "name" : "Sky" ,
                 "job" : "Teacher"
@@ -38,6 +40,18 @@ test.describe('User API Tests', () => {
         expect(responseBody.job).toEqual ("Teacher");
     
     });
+
+    test('GET List Users' , async ({request}) => {
+        const resp = await request.get(`${URL}/users?page=2`);
+
+    
+        expect (resp.status()).toBe(200)
+        const respBody = await resp.json() ;
+        console.log(resp)
+        expect (respBody).toHaveProperty("page")
+       
+    })
+
 
 
 }); 
