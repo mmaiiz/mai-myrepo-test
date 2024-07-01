@@ -10,14 +10,14 @@ test("should able to login via api", async ({ request }) => {
       }
     });
 
-  expect(resp).toBeOK();
+  expect(resp).toBeOK(); //ใช้เพื่อเช็คว่า สถานะเป็น success ตั้งแต่ 200-299 
   expect((await resp.json()).access_token).not.toBeNull();
 
 });
 
 // Reqres.in Login
 test('Login - Fail' , async ({request}) => {
-  const resp = await request.post(resource.baseURL , {
+  const resp = await request.post(`${resource.baseURL}/login` , {
       data: {
         "email": "peter@klaven"
       }
